@@ -1,0 +1,15 @@
+Functionalities
+
+Todos os tipos de pessoas (Employee), degrees e subjects:
+	- adicionar
+	- remover
+
+(para todos, inclui as funcionalidades de Employee) 
+	
+Student:
+	- (as preparadas pela classe)
+	- mudar curso
+	- listar todas as cadeiras por diferentes ordem
+	- listar apenas algumas cadeiras (so completas ou inc,
+		so as de um semestre, so as de um ano)
+		
