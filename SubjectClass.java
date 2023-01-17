@@ -3,11 +3,13 @@ import java.util.List;
 public class SubjectClass implements Subject {
 
 	private int id, ects, semester, year, grade, workload;
+	private String name;
 	private boolean isComplete;
 	private List<Professor> professors;
 	
-	public SubjectClass(int id, int ects, int semester, int year, int workload, List<Professor> professors) {
+	public SubjectClass(int id, String name, int ects, int semester, int year, int workload, List<Professor> professors) {
 		this.id = id;
+		this.name = name;
 		this.ects = ects;
 		this.workload = workload;
 		this.professors = professors;
@@ -18,6 +20,11 @@ public class SubjectClass implements Subject {
 	@Override
 	public int getECTS() {
 		return ects;
+	}
+
+	@Override
+	public void setECTS(int ects) {
+		this.ects = ects;
 	}
 
 	@Override
@@ -42,8 +49,18 @@ public class SubjectClass implements Subject {
 	}
 
 	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
 	public List<Professor> getProfessors() {
 		return professors;
+	}
+
+	@Override
+	public void setProfessors(List<Professor> professors) {
+		this.professors = professors;
 	}
 
 	@Override
@@ -52,12 +69,27 @@ public class SubjectClass implements Subject {
 	}
 
 	@Override
+	public void setTotalWorkload(int workload) {
+		this.workload = workload;
+	}
+
+	@Override
 	public int getSemester() {
 		return semester;
 	}
 
 	@Override
+	public void setSemester(int semester) {
+		this.semester = semester;
+	}
+
+	@Override
 	public int getYear() {
 		return year;
+	}
+
+	@Override
+	public void setYear(int year) {
+		this.year = year;
 	}
 }

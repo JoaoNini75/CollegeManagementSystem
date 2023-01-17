@@ -7,13 +7,13 @@ public class DegreeClass implements Degree {
 	private double yearlyFee;
 	private List<Subject> subjects;
 	
-	public DegreeClass(String name, String type, int ects, int yearNum, double yearlyFee, List<Subject> subjects) {
+	public DegreeClass(String name, String type, int ects, int yearNum, double yearlyFee) {
 		this.name = name;
 		this.type = type;
 		this.ects = ects;
 		this.yearNum = yearNum;
 		this.yearlyFee = yearlyFee;
-		this.subjects = subjects;
+		this.subjects = null;
 	}
 
 	@Override
@@ -49,6 +49,18 @@ public class DegreeClass implements Degree {
 	@Override
 	public void setYearlyFee(double yearlyFee) {
 		this.yearlyFee = yearlyFee;	
+	}
+
+	@Override
+	public void addSubject(Subject subject) {
+		subjects.add(subject);
+	}
+
+	@Override
+	public Subject removeSubject(int subjectId) {
+		Subject subject = subjects.get(subjectId);
+		subjects.remove(subjectId);
+		return subject;
 	}
 
 }

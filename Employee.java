@@ -4,6 +4,10 @@ public interface Employee {
 	int getId();
 
 	String getName();
+
+	int getWeeklyWorkload();
+
+	void setWeeklyWorkload(int weeklyWorkload);
 	
 	double getSalary();
 	

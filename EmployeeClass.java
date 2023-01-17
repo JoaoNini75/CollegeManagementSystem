@@ -1,14 +1,17 @@
 
-public class EmployeeClass implements Employee {
+public abstract class EmployeeClass implements Employee {
 
-	private int id;
-	private String name, role;
+	private final int id;
+	private int weeklyWorkload;
+	private final String name;
+	private String role;
 	private double salary; 		// monthly
 	
-	public EmployeeClass(int id, String name, int salary, String role) {
+	public EmployeeClass(int id, String name, int salary, int weeklyWorkload, String role) {
 		this.id = id;
 		this.name = name;
 		this.salary = salary;
+		this.weeklyWorkload = weeklyWorkload;
 		this.role = role;
 	}
 
@@ -20,6 +23,16 @@ public class EmployeeClass implements Employee {
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public int getWeeklyWorkload() {
+		return weeklyWorkload;
+	}
+
+	@Override
+	public void setWeeklyWorkload(int weeklyWorkload) {
+		this.weeklyWorkload = weeklyWorkload;
 	}
 
 	@Override

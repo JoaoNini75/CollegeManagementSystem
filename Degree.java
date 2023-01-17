@@ -13,6 +13,10 @@ public interface Degree {
 	double getYearlyFee();
 	
 	void setYearlyFee(double yearlyFee);
+
+	void addSubject(Subject subject);
+
+	Subject removeSubject(int subjectId);
 	
 	List<Subject> getSubjects();
 }
