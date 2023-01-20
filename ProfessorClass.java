@@ -4,9 +4,9 @@ public class ProfessorClass extends EmployeeClass implements Professor  {
 
     private List<Subject> subjectsTaught;
 
-    public ProfessorClass(int id, String name, int salary, int weeklyWorkload, String role, List<Subject> subjectsTaught) {
+    public ProfessorClass(int id, String name, int salary, int weeklyWorkload, String role) {
         super(id, name, salary, weeklyWorkload, role);
-        this.subjectsTaught = subjectsTaught;
+        this.subjectsTaught = null;
     }
 
     @Override
@@ -15,7 +15,19 @@ public class ProfessorClass extends EmployeeClass implements Professor  {
     }
 
     @Override
-    public void setSubjectsTaught(List<Subject> subjectsTaught) {
-        this.subjectsTaught = subjectsTaught;
+    public boolean addSubjectTaught(Subject subjectTaught) {
+        if (subjectsTaught.contains(subjectTaught))
+            return false;
+        subjectsTaught.add(subjectTaught);
+        return true;
     }
+
+    @Override
+    public boolean removeSubjectTaught(Subject subjectTaught) {
+        if (!subjectsTaught.contains(subjectTaught))
+            return false;
+        subjectsTaught.remove(subjectTaught);
+        return true;
+    }
+
 }

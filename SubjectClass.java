@@ -2,17 +2,16 @@ import java.util.List;
 
 public class SubjectClass implements Subject {
 
-	private int id, ects, semester, year, grade, workload;
+	private int ects, semester, year, grade, workload;
 	private String name;
 	private boolean isComplete;
 	private List<Professor> professors;
 	
-	public SubjectClass(int id, String name, int ects, int semester, int year, int workload, List<Professor> professors) {
-		this.id = id;
+	public SubjectClass(String name, int ects, int semester, int year, int workload) {
 		this.name = name;
 		this.ects = ects;
 		this.workload = workload;
-		this.professors = professors;
+		this.professors = null;
 		this.isComplete = false;
 		this.grade = -1;
 	}
@@ -44,11 +43,6 @@ public class SubjectClass implements Subject {
 	}
 
 	@Override
-	public int getId() {
-		return id;
-	}
-
-	@Override
 	public String getName() {
 		return name;
 	}
@@ -59,8 +53,19 @@ public class SubjectClass implements Subject {
 	}
 
 	@Override
-	public void setProfessors(List<Professor> professors) {
-		this.professors = professors;
+	public boolean addProfessor(Professor professor) {
+		if (professors.contains(professor))
+			return false;
+		professors.add(professor);
+		return true;
+	}
+
+	@Override
+	public boolean removeProfessor(Professor professor) {
+		if (!professors.contains(professor))
+			return false;
+		professors.remove(professor);
+		return true;
 	}
 
 	@Override

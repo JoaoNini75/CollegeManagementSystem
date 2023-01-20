@@ -2,58 +2,74 @@ import java.util.Scanner;
 
 public class Main {
 
-	/**
-	 * Comandos do utilizador.
-	 */
+	// Comandos do utilizador
 	private static final String HELP = "HELP";
-	private static final String ADD_DEGREE = "ADD DEGREE";
-	private static final String ADD_SUBJECT = "ADD SUBJECT";
-	private static final String ADD_STUDENT = "ADD STUDENT";
-	private static final String ADD_PROFESSOR = "ADD PROFESSOR";
-	private static final String ADD_RESEARCHER = "ADD RESEARCHER";
+	private static final String ADD_DEGREE = "ADD_DEGREE";
+	private static final String ADD_SUBJECT = "ADD_SUBJECT";
+	private static final String ADD_STUDENT = "ADD_STUDENT";
+	private static final String ADD_PROFESSOR = "ADD_PROFESSOR";
+	private static final String ADD_RESEARCHER = "ADD_RESEARCHER";
 
-	private static final String REMOVE_DEGREE = "REMOVE DEGREE";
-	private static final String REMOVE_SUBJECT = "REMOVE SUBJECT";
-	private static final String REMOVE_STUDENT = "REMOVE STUDENT";
-	private static final String REMOVE_PROFESSOR = "REMOVE PROFESSOR";
-	private static final String REMOVE_RESEARCHER = "REMOVE RESEARCHER";
+	private static final String REMOVE_DEGREE = "REMOVE_DEGREE";
+	private static final String REMOVE_SUBJECT = "REMOVE_SUBJECT";
+	private static final String REMOVE_STUDENT = "REMOVE_STUDENT";
+	private static final String REMOVE_PROFESSOR = "REMOVE_PROFESSOR";
+	private static final String REMOVE_RESEARCHER = "REMOVE_RESEARCHER";
 
-	private static final String ADD_SUBJECT_TO_DEGREE = "ADD SUBJECT TO DEGREE";
+	private static final String ADD_SUBJECT_TO_DEGREE = "ADD_SUBJECT_DEGREE";
 
 
 
 	private static final String EXIT = "EXIT";
 
-	/**
-	 * Feedback dado pelo programa.
-	 */
+
+	// Feedback dado pelo programa
 	private static final String WELCOME = "Welcome to the college management system :)\nType help to get the list of the available commands.";
 	private static final String PRINT_HELP = "TODO";
+	private static final String INVALID_ARGUMENTS = "Invalid arguments. For more information, type help.";
+	private static final String EXITING = "Exiting...";
+
+
 	private static final String DEGREE_EXISTS = "Degree already exists.";
 	private static final String DEGREE_ADDED = "Degree added.";
 	private static final String DEGREE_NOT_EXIST = "Degree does not exist.";
 	private static final String DEGREE_REMOVED = "Degree removed.";
-	private static final String SUBJECT_ADDED_TO_DEGREE = "Subject added to degree";
-	private static final String SUBJECT_NOT_EXIST = "Subject does not exist";
 
-	private static final String EXITING = "Exiting...";
+	private static final String SUBJECT_ADDED_TO_DEGREE = "Subject added to degree.";
+	private static final String SUBJECT_NOT_EXIST = "Subject does not exist.";
+	private static final String SUBJECT_ADDED = "Subject added.";
+	private static final String SUBJECT_ALREADY_ADDED = "Subject was already added.";
+	private static final String SUBJECT_REMOVED = "Subject removed.";
+
+	private static final String STUDENT_ADDED = "Student added.";
+	private static final String STUDENT_NOT_EXIST = "Student does not exist.";
+	private static final String STUDENT_REMOVED = "Student removed.";
+
+	private static final String PROFESSOR_ADDED = "Professor added.";
+	private static final String PROFESSOR_NOT_EXIST = "Professor does not exist.";
+	private static final String PROFESSOR_REMOVED = "Professor removed.";
+
+	private static final String RESEARCHER_ADDED = "Researcher added.";
+	private static final String RESEARCHER_NOT_EXIST = "Researcher does not exist.";
+	private static final String RESEARCHER_REMOVED = "Researcher removed.";
+
+
 
 	public static void main(String[] args) {
 		commands();
 	}
 
-	private static void commands() {
+	private static void commands() { // TODO receber e imprimir os objetos dos comandos de remove do ms na main
 		ManagementSystem ms = new ManagementSystem();
 		Scanner in = new Scanner(System.in);
 		System.out.println(WELCOME);
 		String userIn = in.next().toUpperCase();
-		while (!userIn.equals(EXIT)) { //TODO resolver problema comandos c/ varias palavras
+		while (!userIn.equals(EXIT)) {
 			switch (userIn) {
 				case HELP:
 					System.out.println(PRINT_HELP);
 					break;
 				case ADD_DEGREE:
-					System.out.println("0");
 					addDegree(in, ms);
 					break;
 				case ADD_SUBJECT:
@@ -72,6 +88,18 @@ public class Main {
 				case REMOVE_DEGREE:
 					removeDegree(in, ms);
 					break;
+				case REMOVE_SUBJECT:
+					removeSubject(in, ms);
+					break;
+				case REMOVE_STUDENT:
+					removeStudent(in, ms);
+					break;
+				case REMOVE_PROFESSOR:
+					removeProfessor(in, ms);
+					break;
+				case REMOVE_RESEARCHER:
+					removeResearcher(in, ms);
+					break;
 
 				case ADD_SUBJECT_TO_DEGREE:
 					addSubjectToDegree(in, ms);
@@ -87,15 +115,16 @@ public class Main {
 	}
 
 	private static void addDegree(Scanner in, ManagementSystem ms) {
-		System.out.println("1");
 		String name = in.next();
 		String type = in.next();
 		int ects = in.nextInt();
 		int yearNum = in.nextInt();
 		int yearlyFee = in.nextInt();
 		in.nextLine();
-		System.out.println("2");
-		if (ms.degreeExists(name))
+
+		if (name.equals("") || type.equals("") || ects <= 0 ||  yearNum <= 0 || yearlyFee <= 0)
+			System.out.println(INVALID_ARGUMENTS);
+		else if (ms.degreeExists(name))
 			System.out.println(DEGREE_EXISTS);
 		else {
 			ms.addDegree(name, type, ects, yearNum, yearlyFee);
@@ -104,28 +133,72 @@ public class Main {
 	}
 
 	private static void addSubject(Scanner in, ManagementSystem ms) {
+		String name = in.next();
+		int ects = in.nextInt();
+		int semester = in.nextInt();
+		int year = in.nextInt();
+		int workload = in.nextInt();
+		in.nextLine();
 
+		if (name.equals("") || ects <= 0 || semester <= 0 || year <= 0 || workload <= 0)
+			System.out.println(INVALID_ARGUMENTS);
+		else if (ms.subjectExists(name))
+			System.out.println(SUBJECT_ALREADY_ADDED);
+		else {
+			ms.addSubject(name, ects, semester, year, workload);
+			System.out.println(SUBJECT_ADDED);
+		}
 	}
 
 	private static void addStudent(Scanner in, ManagementSystem ms) {
+		String name = in.next();
+		String degreeName = in.nextLine().trim();
 
+		if (name.equals("") || degreeName.equals(""))
+			System.out.println(INVALID_ARGUMENTS);
+		else {
+			ms.addStudent(name, degreeName);
+			System.out.println(STUDENT_ADDED);
+		}
 	}
 
 	private static void addProfessor(Scanner in, ManagementSystem ms) {
+		String name = in.next();
+		int salary = in.nextInt();
+		int weeklyWorkload = in.nextInt();
+		String role = in.nextLine().trim();
 
+		if (name.equals("") || salary <= 0 || weeklyWorkload <= 0 || role.equals(""))
+			System.out.println(INVALID_ARGUMENTS);
+		else {
+			ms.addProfessor(name, salary, weeklyWorkload, role);
+			System.out.println(PROFESSOR_ADDED);
+		}
 	}
 
 	private static void addResearcher(Scanner in, ManagementSystem ms) {
+		String name = in.next();
+		int salary = in.nextInt();
+		int weeklyWorkload = in.nextInt();
+		String role = in.nextLine().trim();
+		String researchGoal = in.nextLine().trim();
+		String researchProgress = in.nextLine().trim();
 
+		if (name.equals("") || salary <= 0 || weeklyWorkload <= 0 || role.equals(""))
+			System.out.println(INVALID_ARGUMENTS);
+		else {
+			ms.addResearcher(name, salary, weeklyWorkload, role, researchGoal, researchProgress);
+			System.out.println(RESEARCHER_ADDED);
+		}
 	}
 
 
-
 	private static void removeDegree(Scanner in, ManagementSystem ms) {
-		String name = in.next();
-		in.nextLine();
+		String name = in.nextLine().trim();
 
-		if (!ms.degreeExists(name))
+		if (name.equals(""))
+			System.out.println(INVALID_ARGUMENTS);
+		else if (!ms.degreeExists(name))
 			System.out.println(DEGREE_NOT_EXIST);
 		else {
 			ms.removeDegree(name);
@@ -133,60 +206,74 @@ public class Main {
 		}
 	}
 
-
-	private static void addSubjectToDegree(Scanner in, ManagementSystem ms) {
-		int subjectId = in.nextInt();
+	private static void removeSubject(Scanner in, ManagementSystem ms) {
 		String name = in.nextLine().trim();
 
-		if (!ms.subjectExists(subjectId))
+		if (name.equals(""))
+			System.out.println(INVALID_ARGUMENTS);
+		else if (!ms.subjectExists(name))
 			System.out.println(SUBJECT_NOT_EXIST);
-		else if (!ms.degreeExists(name))
-			System.out.println(DEGREE_NOT_EXIST);
 		else {
-			ms.addSubjectToDegree(subjectId, name);
-			System.out.println(SUBJECT_ADDED_TO_DEGREE);
+			ms.removeSubject(name);
+			System.out.println(SUBJECT_REMOVED);
+		}
+	}
+
+	private static void removeStudent(Scanner in, ManagementSystem ms) {
+		int id = in.nextInt();
+		in.nextLine();
+
+		if (id < 0)
+			System.out.println(INVALID_ARGUMENTS);
+		else if (!ms.studentExists(id))
+			System.out.println(STUDENT_NOT_EXIST);
+		else {
+			ms.removeStudent(id);
+			System.out.println(STUDENT_REMOVED);
+		}
+	}
+
+	private static void removeProfessor(Scanner in, ManagementSystem ms) {
+		int id = in.nextInt();
+		in.nextLine();
+
+		if (id < 0)
+			System.out.println(INVALID_ARGUMENTS);
+		else if (!ms.employeeExists(id))
+			System.out.println(PROFESSOR_NOT_EXIST);
+		else {
+			ms.removeProfessor(id);
+			System.out.println(PROFESSOR_REMOVED);
+		}
+	}
+
+	private static void removeResearcher(Scanner in, ManagementSystem ms) {
+		int id = in.nextInt();
+		in.nextLine();
+
+		if (id < 0)
+			System.out.println(INVALID_ARGUMENTS);
+		else if (!ms.employeeExists(id))
+			System.out.println(RESEARCHER_NOT_EXIST);
+		else {
+			ms.removeResearcher(id);
+			System.out.println(RESEARCHER_REMOVED);
 		}
 	}
 
 
+	private static void addSubjectToDegree(Scanner in, ManagementSystem ms) {
+		String subjectName = in.next();
+		String degreeName = in.nextLine().trim();
 
-
-
-	/**
-	 * Lista todos os ficheiros proprietarios e partilhados de uma conta.
-	 * @param in - o input de onde os dados vao ser lidos.
-	 * @param dropbox - o CloudSharing a listar a informacao de uma conta.
-	 */
-	/*private static void listFiles(Scanner in, CloudSharing dropbox) {
-		String user = in.next();
-		if (!dropbox.hasUser(user))
-			System.out.println(ACCOUNT_DOES_NOT_EXIST);
+		if (!ms.subjectExists(subjectName))
+			System.out.println(SUBJECT_NOT_EXIST);
+		else if (!ms.degreeExists(degreeName))
+			System.out.println(DEGREE_NOT_EXIST);
 		else {
-			System.out.println(HEADER_LIST_FILES);
-			Iterator<File> it = dropbox.listFiles(user);
-			while (it.hasNext()) {
-				File file = (File) it.next();
-				if (!file.getOwnerName().equals(user))
-					System.out.printf(SHARED_FILE_INFO, file.getName(), file.getSize());
-				else
-					System.out.printf(OWNED_FILE_INFO, file.getName(), file.getSize());
-			}
-			System.out.println();
+			ms.addSubjectToDegree(subjectName, degreeName);
+			System.out.println(SUBJECT_ADDED_TO_DEGREE);
 		}
-	}*/
+	}
 
-	/**
-	 * Lista todas as contas.
-	 * @param dropbox - o CloudSharing a listar as contas.
-	 */
-	/*private static void listAccounts(CloudSharing dropbox) {
-		Iterator<User> it =  dropbox.listAll();
-		System.out.println(HEADER_LIST_ACCOUNTS);
-		while (it.hasNext()) {
-			User user = (User) it.next();
-			System.out.printf(ACCOUNT_INFO, user.getName(), user.getType());
-		}
-		System.out.println();
-
-	}*/
 }

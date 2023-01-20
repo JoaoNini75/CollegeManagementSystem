@@ -4,5 +4,7 @@ public interface Professor extends Employee {
 
     List<Subject> getSubjectsTaught();
 
-    void setSubjectsTaught(List<Subject> subjectsTaught);
+    boolean addSubjectTaught(Subject subjectTaught);
+
+    boolean removeSubjectTaught(Subject subjectTaught);
 }

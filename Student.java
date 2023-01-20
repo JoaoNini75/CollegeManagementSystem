@@ -32,6 +32,6 @@ public interface Student {
 	
 	List<Subject> getSubjects();
 	
-	void completeSubject(int subjectId, int grade);
+	void completeSubject(String subjectName, int grade);
 	
 }

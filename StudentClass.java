@@ -32,12 +32,12 @@ public class StudentClass implements Student {
 		semester++;
 	}
 	
-	public void completeSubject(int subjectId, int grade) {
+	public void completeSubject(String subjectName, int grade) {
 		boolean allSemesterSbjsDone = true;
 		boolean allYearSbjsDone = true;
 		
 		for (int i = 0; i < subjects.size(); i++) {
-			if (subjects.get(i).getId() == subjectId) {
+			if (subjects.get(i).getName().equals(subjectName)) {
 				ects += subjects.get(i).getECTS();
 				subjects.get(i).complete(grade);
 			} else if (subjects.get(i).getSemester() == semester && !subjects.get(i).isComplete())

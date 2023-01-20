@@ -2,7 +2,7 @@ import java.util.List;
 
 public class DegreeClass implements Degree {
 	
-	private String name, type; // fazer do type um enumerado (licenciatura, mestrado, doutoramento, outro)
+	private String name, type; // fazer do type um enumerado (licenciatura, mestrado integrado, mestrado, doutoramento, pos-graduacao, outro)
 	private int ects, yearNum;
 	private double yearlyFee;
 	private List<Subject> subjects;

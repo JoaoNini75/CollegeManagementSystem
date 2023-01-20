@@ -2,8 +2,6 @@ import java.util.List;
 
 public interface Subject {
 
-	int getId();
-
 	String getName();
 	
 	int getECTS();
@@ -12,7 +10,9 @@ public interface Subject {
 	
 	List<Professor> getProfessors();
 
-	void setProfessors(List<Professor> professors);
+	boolean addProfessor(Professor professor);
+
+	boolean removeProfessor(Professor professor);
 	
 	int getTotalWorkload();
 

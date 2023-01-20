@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ManagementSystem {
 
@@ -8,19 +9,18 @@ public class ManagementSystem {
 	private final int EXPECTED_STUDENT_NUM = 16384;
 	private final int EXPECTED_EMPLOYEE_NUM = 1024;
 	
-	private int subjectsIds, employeesIds, studentsIds;
+	private int employeesIds, studentsIds;
 	
 	private HashMap<String, Degree> degrees;
-	private HashMap<Integer, Subject> subjects;
+	private HashMap<String, Subject> subjects;
 	private HashMap<Integer, Student> students;
 	private HashMap<Integer, Employee> employees;
 	
 	public ManagementSystem() {
-		this.subjectsIds = 0;
 		this.employeesIds = 0;
 		this.studentsIds = 0;
 		this.degrees = new HashMap<String, Degree>(EXPECTED_DEGREE_NUM);
-		this.subjects = new HashMap<Integer, Subject>(EXPECTED_SUBJECT_NUM);
+		this.subjects = new HashMap<String, Subject>(EXPECTED_SUBJECT_NUM);
 		this.students = new HashMap<Integer, Student>(EXPECTED_STUDENT_NUM);
 		this.employees = new HashMap<Integer, Employee>(EXPECTED_EMPLOYEE_NUM);
 	}
@@ -36,8 +36,8 @@ public class ManagementSystem {
 		return degree;	
 	}
 
-	public void addSubjectToDegree(int subjectId, String degreeName) {
-		Subject subject = subjects.get(subjectId);
+	public void addSubjectToDegree(String subjectName, String degreeName) {
+		Subject subject = subjects.get(subjectName);
 		Degree degree = degrees.get(degreeName);
 		degree.addSubject(subject);
 	}
@@ -46,23 +46,23 @@ public class ManagementSystem {
 		return degrees.get(name) != null;
 	}
 
-	public void addSubject(int ects, String name, int semester, int year, int workload, List<Professor> professors) {
-		Subject subject = new SubjectClass(subjectsIds++, name, ects, semester, year, workload, professors);
-		subjects.put(subject.getId(), subject);
+	public void addSubject(String name, int ects, int semester, int year, int workload) {
+		Subject subject = new SubjectClass(name, ects, semester, year, workload);
+		subjects.put(subject.getName(), subject);
 	}
 
-	public Subject removeSubject(int id) {
-		Subject subject = subjects.get(id);
-		subjects.remove(id);
+	public Subject removeSubject(String name) {
+		Subject subject = subjects.get(name);
+		subjects.remove(name);
 		return subject;
 	}
 
-	public boolean subjectExists(int id) {
-		return subjects.get(id) != null;
+	public boolean subjectExists(String name) {
+		return subjects.get(name) != null;
 	}
 
-	public void addStudent(String name, Degree degree) {
-		Student student = new StudentClass(studentsIds++, name, degree);
+	public void addStudent(String name, String degreeName) {
+		Student student = new StudentClass(studentsIds++, name, degrees.get(degreeName));
 		students.put(student.getId(), student);
 	}
 
@@ -72,8 +72,12 @@ public class ManagementSystem {
 		return student;
 	}
 
-	public void addProfessor(String name, int salary, int weeklyWorkload, String role, List<Subject> subjectsTaught) {
-		Professor professor = new ProfessorClass(employeesIds++, name, salary, weeklyWorkload, role, subjectsTaught);
+	public boolean studentExists(int id) {
+		return subjects.get(id) != null;
+	}
+
+	public void addProfessor(String name, int salary, int weeklyWorkload, String role) {
+		Professor professor = new ProfessorClass(employeesIds++, name, salary, weeklyWorkload, role);
 		employees.put(professor.getId(), professor);
 	}
 
@@ -92,6 +96,10 @@ public class ManagementSystem {
 		Researcher researcher = (Researcher) employees.get(id);
 		employees.remove(id);
 		return researcher;
+	}
+
+	public boolean employeeExists(int id) {
+		return employees.get(id) != null;
 	}
 
 }
