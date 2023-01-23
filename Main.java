@@ -1,4 +1,9 @@
 import java.util.Scanner;
+import SubjectPackage.*;
+import DegreePackage.*;
+import EmployeePackage.*;
+import StudentPackage.*;
+import SystemPackage.*;
 
 public class Main {
 
@@ -59,54 +64,28 @@ public class Main {
 		commands();
 	}
 
-	private static void commands() { // TODO receber e imprimir os objetos dos comandos de remove do ms na main
+	// TODO tentar tornar o programa mais visual (html, gui, etc)
+	private static void commands() {
 		ManagementSystem ms = new ManagementSystem();
 		Scanner in = new Scanner(System.in);
 		System.out.println(WELCOME);
 		String userIn = in.next().toUpperCase();
 		while (!userIn.equals(EXIT)) {
 			switch (userIn) {
-				case HELP:
-					System.out.println(PRINT_HELP);
-					break;
-				case ADD_DEGREE:
-					addDegree(in, ms);
-					break;
-				case ADD_SUBJECT:
-					addSubject(in, ms);
-					break;
-				case ADD_STUDENT:
-					addStudent(in, ms);
-					break;
-				case ADD_PROFESSOR:
-					addProfessor(in, ms);
-					break;
-				case ADD_RESEARCHER:
-					addResearcher(in, ms);
-					break;
-
-				case REMOVE_DEGREE:
-					removeDegree(in, ms);
-					break;
-				case REMOVE_SUBJECT:
-					removeSubject(in, ms);
-					break;
-				case REMOVE_STUDENT:
-					removeStudent(in, ms);
-					break;
-				case REMOVE_PROFESSOR:
-					removeProfessor(in, ms);
-					break;
-				case REMOVE_RESEARCHER:
-					removeResearcher(in, ms);
-					break;
-
-				case ADD_SUBJECT_TO_DEGREE:
-					addSubjectToDegree(in, ms);
-					break;
-
-				default:
-					break;
+				case HELP -> System.out.println(PRINT_HELP);
+				case ADD_DEGREE -> addDegree(in, ms);
+				case ADD_SUBJECT -> addSubject(in, ms);
+				case ADD_STUDENT -> addStudent(in, ms);
+				case ADD_PROFESSOR -> addProfessor(in, ms);
+				case ADD_RESEARCHER -> addResearcher(in, ms);
+				case REMOVE_DEGREE -> removeDegree(in, ms);
+				case REMOVE_SUBJECT -> removeSubject(in, ms);
+				case REMOVE_STUDENT -> removeStudent(in, ms);
+				case REMOVE_PROFESSOR -> removeProfessor(in, ms);
+				case REMOVE_RESEARCHER -> removeResearcher(in, ms);
+				case ADD_SUBJECT_TO_DEGREE -> addSubjectToDegree(in, ms);
+				default -> {
+				}
 			}
 			userIn = in.next().toUpperCase();
 		}
@@ -201,7 +180,8 @@ public class Main {
 		else if (!ms.degreeExists(name))
 			System.out.println(DEGREE_NOT_EXIST);
 		else {
-			ms.removeDegree(name);
+			Degree degree = ms.removeDegree(name);
+			System.out.println(degree.getInfo());
 			System.out.println(DEGREE_REMOVED);
 		}
 	}
@@ -214,7 +194,8 @@ public class Main {
 		else if (!ms.subjectExists(name))
 			System.out.println(SUBJECT_NOT_EXIST);
 		else {
-			ms.removeSubject(name);
+			Subject subject = ms.removeSubject(name);
+			System.out.println(subject.getInfo());
 			System.out.println(SUBJECT_REMOVED);
 		}
 	}
@@ -228,7 +209,8 @@ public class Main {
 		else if (!ms.studentExists(id))
 			System.out.println(STUDENT_NOT_EXIST);
 		else {
-			ms.removeStudent(id);
+			Student student = ms.removeStudent(id);
+			System.out.println(student.getInfo());
 			System.out.println(STUDENT_REMOVED);
 		}
 	}
@@ -242,7 +224,8 @@ public class Main {
 		else if (!ms.employeeExists(id))
 			System.out.println(PROFESSOR_NOT_EXIST);
 		else {
-			ms.removeProfessor(id);
+			Professor professor = ms.removeProfessor(id);
+			System.out.println(professor.getInfo("Professor"));
 			System.out.println(PROFESSOR_REMOVED);
 		}
 	}
@@ -256,22 +239,23 @@ public class Main {
 		else if (!ms.employeeExists(id))
 			System.out.println(RESEARCHER_NOT_EXIST);
 		else {
-			ms.removeResearcher(id);
+			Researcher researcher = ms.removeResearcher(id);
+			System.out.println(researcher.getInfo("Researcher"));
 			System.out.println(RESEARCHER_REMOVED);
 		}
 	}
 
 
 	private static void addSubjectToDegree(Scanner in, ManagementSystem ms) {
-		String subjectName = in.next();
-		String degreeName = in.nextLine().trim();
+		String degreeName = in.next();
+		String subjectName = in.nextLine().trim();
 
 		if (!ms.subjectExists(subjectName))
 			System.out.println(SUBJECT_NOT_EXIST);
 		else if (!ms.degreeExists(degreeName))
 			System.out.println(DEGREE_NOT_EXIST);
 		else {
-			ms.addSubjectToDegree(subjectName, degreeName);
+			ms.addSubjectToDegree(degreeName, subjectName);
 			System.out.println(SUBJECT_ADDED_TO_DEGREE);
 		}
 	}
