@@ -59,12 +59,10 @@ public class Main {
 	private static final String RESEARCHER_REMOVED = "Researcher removed.";
 
 
-
 	public static void main(String[] args) {
 		commands();
 	}
 
-	// TODO tentar tornar o programa mais visual (html, gui, etc)
 	private static void commands() {
 		ManagementSystem ms = new ManagementSystem();
 		Scanner in = new Scanner(System.in);
