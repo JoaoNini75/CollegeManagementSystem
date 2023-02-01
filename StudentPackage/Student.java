@@ -2,12 +2,15 @@ package StudentPackage;
 
 import java.util.List;
 import SubjectPackage.*;
+import DegreePackage.*;
 
 public interface Student {
 	
 	int getId();
 	
 	String getName();
+
+	void changeDegree(Degree degree);
 	
 	String getEmail();
 

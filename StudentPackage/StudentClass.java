@@ -10,7 +10,7 @@ public class StudentClass implements Student {
 	
 	private int id, semester, year, ects;
 	private String name, email;
-	private double courseAverage;		// 12 atributos
+	private double courseAverage;
 	private boolean feesPaid;
 	private Degree degree;
 	private List<Subject> subjects;
@@ -62,7 +62,9 @@ public class StudentClass implements Student {
 	@Override
 	public String getInfo() {
 		String info = "Student Info:\n";
+		info += "Student ID: " + id + "\n";
 		info += "Name: " + name + "\n";
+		info += "Email: " + email + "\n";
 		info += "Degree: " + degree.getName() + "\n";
 		info += "Fees paid: " + feesPaid + "\n";
 		info += "ECTS: " + ects + "\n";
@@ -93,6 +95,15 @@ public class StudentClass implements Student {
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public void changeDegree(Degree degree) {
+		this.degree = degree;
+		this.semester = 1;
+		this.year = 1;
+		this.ects = 0;
+		this.courseAverage = -1;
 	}
 
 	@Override
