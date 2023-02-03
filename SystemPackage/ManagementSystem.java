@@ -1,6 +1,7 @@
 package SystemPackage;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import SubjectPackage.*;
@@ -27,10 +28,10 @@ public class ManagementSystem {
 			System.out.println("Empty");
 			this.employeesIds = 0;
 			this.studentsIds = 0;
-			this.students = new HashMap<Integer, Student>(EXPECTED_STUDENT_NUM);
-			this.employees = new HashMap<Integer, Employee>(EXPECTED_EMPLOYEE_NUM);
-			this.subjects = new HashMap<String, Subject>(EXPECTED_SUBJECT_NUM);
-			this.degrees = new HashMap<String, Degree>(EXPECTED_DEGREE_NUM);
+			this.students = new HashMap<>(EXPECTED_STUDENT_NUM);
+			this.employees = new HashMap<>(EXPECTED_EMPLOYEE_NUM);
+			this.subjects = new HashMap<>(EXPECTED_SUBJECT_NUM);
+			this.degrees = new HashMap<>(EXPECTED_DEGREE_NUM);
 		} else
 			System.out.println("Not empty");
 	}
@@ -59,6 +60,7 @@ public class ManagementSystem {
 	}
 
 	public void save() {
+		System.out.println("Saved");
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data"));
 			out.writeObject(students);
@@ -71,19 +73,20 @@ public class ManagementSystem {
 	}
 
 	public String[][] getStudentTableData(int columnNum) {
-		String[][] data = new String[students.size()][columnNum];
+		List<Student> studentList = new ArrayList<>(students.values());
+		String[][] data = new String[studentList.size()][columnNum];
 
 		int j = 0;
-		for (int i = 0; i < students.size(); i++) {
-			data[i][j++] = String.valueOf(students.get(i).getId());
-			data[i][j++] = students.get(i).getName();
-			data[i][j++] = students.get(i).getEmail();
-			data[i][j++] = students.get(i).getDegreeName();
-			data[i][j++] = String.valueOf(students.get(i).areFeesPaid());
-			data[i][j++] = String.valueOf(students.get(i).getECTS());
-			data[i][j++] = String.valueOf(students.get(i).getCourseAverage());
-			data[i][j++] = String.valueOf(students.get(i).getSemester());
-			data[i][j] = String.valueOf(students.get(i).getYear());
+		for (int i = 0; i < studentList.size(); i++) {
+			data[i][j++] = String.valueOf(studentList.get(i).getId());
+			data[i][j++] = studentList.get(i).getName();
+			data[i][j++] = studentList.get(i).getEmail();
+			data[i][j++] = studentList.get(i).getDegreeName();
+			data[i][j++] = String.valueOf(studentList.get(i).areFeesPaid());
+			data[i][j++] = String.valueOf(studentList.get(i).getECTS());
+			data[i][j++] = String.valueOf(studentList.get(i).getCourseAverage());
+			data[i][j++] = String.valueOf(studentList.get(i).getSemester());
+			data[i][j] = String.valueOf(studentList.get(i).getYear());
 			j = 0;
 		}
 
@@ -91,15 +94,16 @@ public class ManagementSystem {
 	}
 
 	public String[][] getEmployeeTableData(int columnNum) {
-		String[][] data = new String[employees.size()][columnNum];
+		List<Employee> employeeList = new ArrayList<>(employees.values());
+		String[][] data = new String[employeeList.size()][columnNum];
 
 		int j = 0;
-		for (int i = 0; i < employees.size(); i++) {
-			data[i][j++] = String.valueOf(employees.get(i).getId());
-			data[i][j++] = employees.get(i).getType();
-			data[i][j++] = employees.get(i).getName();
-			data[i][j++] = String.valueOf(employees.get(i).getSalary());
-			data[i][j] = String.valueOf(employees.get(i).getWeeklyWorkload());
+		for (int i = 0; i < employeeList.size(); i++) {
+			data[i][j++] = String.valueOf(employeeList.get(i).getId());
+			data[i][j++] = employeeList.get(i).getType();
+			data[i][j++] = employeeList.get(i).getName();
+			data[i][j++] = String.valueOf(employeeList.get(i).getSalary());
+			data[i][j] = String.valueOf(employeeList.get(i).getWeeklyWorkload());
 			j = 0;
 		}
 
@@ -107,15 +111,16 @@ public class ManagementSystem {
 	}
 
 	public String[][] getSubjectTableData(int columnNum) {
-		String[][] data = new String[subjects.size()][columnNum];
+		List<Subject> subjectList = new ArrayList<>(subjects.values());
+		String[][] data = new String[subjectList.size()][columnNum];
 
 		int j = 0;
-		for (int i = 0; i < subjects.size(); i++) {
-			data[i][j++] = subjects.get(i).getName();
-			data[i][j++] = String.valueOf(subjects.get(i).getECTS());
-			data[i][j++] = String.valueOf(subjects.get(i).getSemester());
-			data[i][j++] = String.valueOf(subjects.get(i).getYear());
-			data[i][j] = String.valueOf(subjects.get(i).getTotalWorkload());
+		for (int i = 0; i < subjectList.size(); i++) {
+			data[i][j++] = subjectList.get(i).getName();
+			data[i][j++] = String.valueOf(subjectList.get(i).getECTS());
+			data[i][j++] = String.valueOf(subjectList.get(i).getSemester());
+			data[i][j++] = String.valueOf(subjectList.get(i).getYear());
+			data[i][j] = String.valueOf(subjectList.get(i).getTotalWorkload());
 			j = 0;
 		}
 
@@ -123,18 +128,16 @@ public class ManagementSystem {
 	}
 
 	public String[][] getDegreeTableData(int columnNum) {
-		String[][] data = new String[degrees.size()][columnNum];
-
-		if (degrees.get(0) == null)
-			return data;
+		List<Degree> degreeList = new ArrayList<>(degrees.values());
+		String[][] data = new String[degreeList.size()][columnNum];
 
 		int j = 0;
-		for (int i = 0; i < degrees.size(); i++) {
-			data[i][j++] = degrees.get(i).getName();
-			data[i][j++] = degrees.get(i).getType();
-			data[i][j++] = String.valueOf(degrees.get(i).getECTS());
-			data[i][j++] = String.valueOf(degrees.get(i).getYearNum());
-			data[i][j] = String.valueOf(degrees.get(i).getYearlyFee());
+		for (int i = 0; i < degreeList.size(); i++) {
+			data[i][j++] = degreeList.get(i).getName();
+			data[i][j++] = degreeList.get(i).getType();
+			data[i][j++] = String.valueOf(degreeList.get(i).getECTS());
+			data[i][j++] = String.valueOf(degreeList.get(i).getYearNum());
+			data[i][j] = String.valueOf(degreeList.get(i).getYearlyFee());
 			j = 0;
 		}
 
@@ -173,8 +176,8 @@ public class ManagementSystem {
 		if (subjects == null)
 			return false;
 
-		for (int i = 0; i < subjects.size(); i++)
-			if (subjects.get(i).getName().equals(subjectName))
+		for (Subject subject : subjects)
+			if (subject.getName().equals(subjectName))
 				return true;
 
 		return false;
@@ -212,7 +215,7 @@ public class ManagementSystem {
 	}
 
 	public boolean studentExists(int id) {
-		return subjects.get(id) != null;
+		return students.get(id) != null;
 	}
 
 	public void addProfessor(String name, int salary, int weeklyWorkload, String role) {

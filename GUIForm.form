@@ -70,7 +70,7 @@
             </properties>
             <border type="none"/>
             <children>
-              <component id="162ba" class="javax.swing.JButton" binding="professorAddBtn">
+              <component id="162ba" class="javax.swing.JButton" binding="employeeAddBtn">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -78,7 +78,7 @@
                   <text value="Add"/>
                 </properties>
               </component>
-              <component id="41d0" class="javax.swing.JButton" binding="professorRemoveBtn">
+              <component id="41d0" class="javax.swing.JButton" binding="employeeRemoveBtn">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
