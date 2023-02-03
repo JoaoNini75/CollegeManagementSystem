@@ -1,6 +1,8 @@
 package EmployeePackage;
 
-public abstract class EmployeeClass implements Employee {
+import java.io.Serializable;
+
+public abstract class EmployeeClass implements Employee, Serializable {
 
 	private final int id;
 	private int weeklyWorkload;

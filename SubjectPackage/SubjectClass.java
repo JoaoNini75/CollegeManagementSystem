@@ -1,10 +1,11 @@
 package SubjectPackage;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import EmployeePackage.*;
 
-public class SubjectClass implements Subject {
+public class SubjectClass implements Subject, Serializable {
 
 	private int ects, semester, year, grade, workload;
 	private String name;

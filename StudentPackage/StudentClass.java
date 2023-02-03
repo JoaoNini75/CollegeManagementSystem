@@ -1,10 +1,11 @@
 package StudentPackage;
 
+import java.io.Serializable;
 import java.util.List;
 import SubjectPackage.*;
 import DegreePackage.*;
 
-public class StudentClass implements Student {
+public class StudentClass implements Student, Serializable {
 
 	private static final String EMAIL = "@ourCollege.com";
 	

@@ -1,10 +1,11 @@
 package EmployeePackage;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import SubjectPackage.*;
 
-public class ProfessorClass extends EmployeeClass implements Professor  {
+public class ProfessorClass extends EmployeeClass implements Professor, Serializable {
 
     private List<Subject> subjectsTaught;
 

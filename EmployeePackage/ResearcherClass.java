@@ -1,6 +1,8 @@
 package EmployeePackage;
 
-public class ResearcherClass extends EmployeeClass implements Researcher {
+import java.io.Serializable;
+
+public class ResearcherClass extends EmployeeClass implements Researcher, Serializable {
 
     private String researchGoal, researchProgress;
 

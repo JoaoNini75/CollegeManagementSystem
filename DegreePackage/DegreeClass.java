@@ -1,10 +1,11 @@
 package DegreePackage;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import SubjectPackage.*;
 
-public class DegreeClass implements Degree {
+public class DegreeClass implements Degree, Serializable {
 	
 	private String name, type; // fazer do type um enumerado (licenciatura, mestrado integrado, mestrado, doutoramento, pos-graduacao, outro)
 	private int ects, yearNum;
