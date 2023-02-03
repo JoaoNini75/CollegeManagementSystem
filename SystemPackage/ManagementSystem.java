@@ -90,6 +90,57 @@ public class ManagementSystem {
 		return data;
 	}
 
+	public String[][] getEmployeeTableData(int columnNum) {
+		String[][] data = new String[employees.size()][columnNum];
+
+		int j = 0;
+		for (int i = 0; i < employees.size(); i++) {
+			data[i][j++] = String.valueOf(employees.get(i).getId());
+			data[i][j++] = employees.get(i).getType();
+			data[i][j++] = employees.get(i).getName();
+			data[i][j++] = String.valueOf(employees.get(i).getSalary());
+			data[i][j] = String.valueOf(employees.get(i).getWeeklyWorkload());
+			j = 0;
+		}
+
+		return data;
+	}
+
+	public String[][] getSubjectTableData(int columnNum) {
+		String[][] data = new String[subjects.size()][columnNum];
+
+		int j = 0;
+		for (int i = 0; i < subjects.size(); i++) {
+			data[i][j++] = subjects.get(i).getName();
+			data[i][j++] = String.valueOf(subjects.get(i).getECTS());
+			data[i][j++] = String.valueOf(subjects.get(i).getSemester());
+			data[i][j++] = String.valueOf(subjects.get(i).getYear());
+			data[i][j] = String.valueOf(subjects.get(i).getTotalWorkload());
+			j = 0;
+		}
+
+		return data;
+	}
+
+	public String[][] getDegreeTableData(int columnNum) {
+		String[][] data = new String[degrees.size()][columnNum];
+
+		if (degrees.get(0) == null)
+			return data;
+
+		int j = 0;
+		for (int i = 0; i < degrees.size(); i++) {
+			data[i][j++] = degrees.get(i).getName();
+			data[i][j++] = degrees.get(i).getType();
+			data[i][j++] = String.valueOf(degrees.get(i).getECTS());
+			data[i][j++] = String.valueOf(degrees.get(i).getYearNum());
+			data[i][j] = String.valueOf(degrees.get(i).getYearlyFee());
+			j = 0;
+		}
+
+		return data;
+	}
+
 	public void addDegree(String name, String type, int ects, int yearNum, int yearlyFee) {
 		Degree degree = new DegreeClass(name, type, ects, yearNum, yearlyFee);
 		degrees.put(degree.getName(), degree);

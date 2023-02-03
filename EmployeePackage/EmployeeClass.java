@@ -19,6 +19,11 @@ public abstract class EmployeeClass implements Employee, Serializable {
 	}
 
 	@Override
+	public String getType() {
+		return "";
+	}
+
+	@Override
 	public int getId() {
 		return id;
 	}

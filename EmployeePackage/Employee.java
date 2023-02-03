@@ -4,6 +4,8 @@ public interface Employee {
 	
 	int getId();
 
+	String getType();
+
 	String getName();
 
 	int getWeeklyWorkload();

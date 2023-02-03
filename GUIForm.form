@@ -27,7 +27,7 @@
             </properties>
             <border type="none"/>
             <children>
-              <component id="6273b" class="javax.swing.JButton" binding="add">
+              <component id="6273b" class="javax.swing.JButton" binding="studentAddBtn">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -35,7 +35,7 @@
                   <text value="Add"/>
                 </properties>
               </component>
-              <component id="906c2" class="javax.swing.JButton" binding="remove">
+              <component id="906c2" class="javax.swing.JButton" binding="studentRemoveBtn">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -63,7 +63,7 @@
           <grid id="17c50" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="10" vgap="20">
             <margin top="15" left="0" bottom="0" right="0"/>
             <constraints>
-              <tabbedpane title="Professors"/>
+              <tabbedpane title="Employees"/>
             </constraints>
             <properties>
               <toolTipText value="Students"/>
@@ -94,49 +94,6 @@
                 <border type="none" title-justification="2"/>
                 <children>
                   <component id="45a8f" class="javax.swing.JTable" binding="professorTable">
-                    <constraints/>
-                    <properties>
-                      <fillsViewportHeight value="false"/>
-                    </properties>
-                  </component>
-                </children>
-              </scrollpane>
-            </children>
-          </grid>
-          <grid id="56bd1" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="10" vgap="20">
-            <margin top="15" left="0" bottom="0" right="0"/>
-            <constraints>
-              <tabbedpane title="Researchers"/>
-            </constraints>
-            <properties>
-              <toolTipText value="Students"/>
-            </properties>
-            <border type="none"/>
-            <children>
-              <component id="4932f" class="javax.swing.JButton" binding="researcherAddBtn">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Add"/>
-                </properties>
-              </component>
-              <component id="669d6" class="javax.swing.JButton" binding="researcherRemoveBtn">
-                <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Remove"/>
-                </properties>
-              </component>
-              <scrollpane id="94572">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-                <border type="none" title-justification="2"/>
-                <children>
-                  <component id="1af95" class="javax.swing.JTable" binding="researcherTable">
                     <constraints/>
                     <properties>
                       <fillsViewportHeight value="false"/>

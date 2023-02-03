@@ -15,6 +15,11 @@ public class ProfessorClass extends EmployeeClass implements Professor, Serializ
     }
 
     @Override
+    public String getType() {
+        return "Professor";
+    }
+
+    @Override
     public List<Subject> getSubjectsTaught() {
         return subjectsTaught;
     }

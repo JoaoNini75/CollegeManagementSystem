@@ -1,3 +1,5 @@
+import StudentPackage.Student;
+import StudentPackage.StudentClass;
 import SystemPackage.ManagementSystem;
 
 import javax.swing.*;
@@ -9,20 +11,18 @@ public class GUIForm {
     private ManagementSystem ms;
 
     private JPanel mainPanel;
-    private JTable[] tables = new JTable[5];
-    private JTable studentTable, professorTable, researcherTable, subjectTable, degreeTable;
+    private JTable[] tables = new JTable[4];
+    private JTable studentTable, professorTable, subjectTable, degreeTable;
     private JButton studentAddBtn, studentRemoveBtn;
     private JButton professorAddBtn, professorRemoveBtn;
-    private JButton researcherAddBtn, researcherRemoveBtn;
     private JButton subjectAddBtn, subjectRemoveBtn;
     private JButton degreeAddBtn, degreeRemoveBtn;
 
     public GUIForm() {
         tables[0] = studentTable;
         tables[1] = professorTable;
-        tables[2] = researcherTable;
-        tables[3] = subjectTable;
-        tables[4] = degreeTable;
+        tables[2] = subjectTable;
+        tables[3] = degreeTable;
 
         ms = new ManagementSystem();
         systemMethods(tables);
@@ -48,6 +48,9 @@ public class GUIForm {
 
     private void systemMethods(JTable[] tables) {
         initializeStudentTable(tables[0]);
+        initializeEmployeeTable(tables[1]);
+        initializeSubjectTable(tables[2]);
+        initializeDegreeTable(tables[3]);
     }
 
     private void initializeStudentTable(JTable table) {
@@ -55,6 +58,24 @@ public class GUIForm {
         String[] columnNames = { "ID", "Name", "Email", "Degree",
                 "Fees paid", "ECTS", "Average", "Semester", "Year" };
         model.setDataVector(ms.getStudentTableData(columnNames.length), columnNames);
+    }
+
+    private void initializeEmployeeTable(JTable table) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        String[] columnNames = { "ID", "Type", "Name", "Salary", "Workload" };
+        model.setDataVector(ms.getEmployeeTableData(columnNames.length), columnNames);
+    }
+
+    private void initializeSubjectTable(JTable table) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        String[] columnNames = { "Name", "ECTS", "Semester", "Year", "Workload" };
+        model.setDataVector(ms.getSubjectTableData(columnNames.length), columnNames);
+    }
+
+    private void initializeDegreeTable(JTable table) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        String[] columnNames = { "Name", "Type", "ECTS", "YearNum", "YearlyFee" };
+        model.setDataVector(ms.getDegreeTableData(columnNames.length), columnNames);
     }
 
     private void setTableTextCenter(JTable table) {

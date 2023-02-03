@@ -13,6 +13,11 @@ public class ResearcherClass extends EmployeeClass implements Researcher, Serial
     }
 
     @Override
+    public String getType() {
+        return "Researcher";
+    }
+
+    @Override
     public String getResearchGoal() {
         return researchGoal;
     }
